@@ -1,0 +1,12 @@
+{
+  "name": "practice",
+  "version": "1.0.0",
+  "description": "for practice js",
+  "main": "index.js",
+  "type":"module",
+  "scripts": {
+    "dev": "node ./index.js"
+  },
+  "author": "",
+  "license": "ISC"
+}

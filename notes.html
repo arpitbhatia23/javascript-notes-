@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Markdown Embed</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/2.0.3/showdown.min.js"></script>
+</head>
+<body>
+
+    <div id="markdown-content">Loading...</div>
+
+    <script>
+        fetch('Jsnotes.md') // Replace with the actual file path
+            .then(response => response.text())
+            .then(markdown => {
+                let converter = new showdown.Converter();
+                document.getElementById('markdown-content').innerHTML = converter.makeHtml(markdown);
+            })
+            .catch(error => console.error('Error loading markdown:', error));
+    </script>
+
+</body>
+</html>
