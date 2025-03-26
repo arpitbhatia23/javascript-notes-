@@ -547,6 +547,75 @@ print() {
 
 }
 
+
+class treeNode {
+  constructor(value){
+    this.value=value
+    this.right=null
+    this.left=null
+
+  }
+}
+
+export class BTS{
+  constructor(){
+    this.root=null
+
+  }
+  insert(value){
+    const newNode=new treeNode(value)
+    if(!this.root) {
+      this.root=newNode
+      console.log("root",this.root)
+      return
+    }
+    let current =this.root
+    while(true){
+      if(value<current.value){
+        if(!current.left){
+          current.left=newNode
+          return
+        }
+        current=current.left
+      }
+      else if (value>current.value){
+        if(!current.right){
+          current.right=newNode
+          return
+        }
+        current=current.right
+      }
+      else{
+        return
+      }
+    }
+  }
+  
+  search(value){
+    let current=this.root
+    while(current){
+      if(value===current.value) return true
+
+     current=value<current.value?current.left:current.right
+
+    }
+    return false
+  }
+  printTree(node = this.root, prefix = "", isLeft = true) {
+    if (!node) return;
+
+    if (node.right) {
+      this.printTree(node.right, prefix + (isLeft ? "│   " : "    "), false);
+    }
+
+    console.log(prefix + (isLeft ? "└── " : "┌── ") + node.value);
+
+    if (node.left) {
+      this.printTree(node.left, prefix + (isLeft ? "    " : "│   "), true);
+    }
+  }
+
+}
 test()
 
 
