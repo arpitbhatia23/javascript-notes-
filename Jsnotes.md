@@ -565,3 +565,94 @@ console.log(newDate.toISOString()); // Output: 2025-03-27T12:34:56.000Z (ISO for
 console.log(newDate.toUTCString()); // Output: Wed, 27 Mar 2025 12:34:56 GMT (UTC format)
 ```
 
+# JavaScript Arrays
+
+JavaScript `Array` is resizable and can contain a mix of different data types. It makes a **shallow copy** when copied.
+
+## Creating Arrays
+```js
+const myArr = [0, 1, 2, 3, 4, 5, 6];
+console.log(myArr[0]); // 0
+
+const myHeros = ["Shaktiman", "Nagaraj"];
+const myArr2 = new Array(1, 2, 3, 4);
+console.log(myArr2[1]); // 2
+```
+
+## Array Methods in JavaScript
+```js
+const myArr = [0, 1, 2, 3, 4, 5, 6];
+
+myArr.push(7); // Adds element at the end: [0, 1, 2, 3, 4, 5, 6, 7]
+myArr.pop(); // Removes last element: [0, 1, 2, 3, 4, 5, 6]
+
+myArr.unshift(9); // Adds element at the beginning: [9, 0, 1, 2, 3, 4, 5, 6]
+myArr.shift(); // Removes first element: [0, 1, 2, 3, 4, 5, 6]
+
+console.log(myArr.includes(9)); // false (checks if element exists, returns boolean)
+console.log(myArr.indexOf(19)); // -1 (returns -1 if element does not exist)
+console.log(myArr.indexOf(2)); // 2 (returns index of element)
+
+const newArr = myArr.join(); // Converts array to string
+console.log(myArr); // [0, 1, 2, 3, 4, 5, 6]
+console.log(newArr); // "0,1,2,3,4,5,6"
+```
+
+## `slice` vs `splice` in Arrays
+```js
+const myArr = [0, 1, 2, 3, 4, 5, 6];
+
+// slice (returns new section, does not modify original array)
+const myArr1 = myArr.slice(1, 3);
+console.log(myArr1); // [1, 2]
+console.log(myArr); // [0, 1, 2, 3, 4, 5, 6]
+
+// splice (modifies original array, removes selected section)
+const myArr2 = myArr.splice(1, 3);
+console.log(myArr2); // [1, 2, 3]
+console.log(myArr); // [0, 4, 5, 6]
+```
+
+## Joining Two Arrays
+```js
+const marvel_heros = ["Thor", "Ironman", "Spiderman"];
+const dc_heros = ["Superman", "Flash", "Batman"];
+
+marvel_heros.push(dc_heros);
+console.log(marvel_heros); // ["Thor", "Ironman", "Spiderman", ["Superman", "Flash", "Batman"]]
+console.log(marvel_heros[3][1]); // "Flash"
+
+const all_heros = marvel_heros.concat(dc_heros);
+console.log(all_heros); // ["Thor", "Ironman", "Spiderman", "Superman", "Flash", "Batman"]
+```
+
+## Joining Arrays Using Spread Operator
+```js
+const all_heros = [...marvel_heros, ...dc_heros];
+console.log(all_heros); // ["Thor", "Ironman", "Spiderman", "Superman", "Flash", "Batman"]
+```
+This creates a **shallow copy** of `marvel_heros` and `dc_heros`.
+
+## `flat` Method in JavaScript
+The `flat()` method is used to flatten nested arrays.
+```js
+const another_array = [1, 2, 3, [4, 5, 6], 7, [6, 7, [4, 5, [8, 9, [10]]]]];
+console.log(another_array.flat(1)); // Flattens one level
+console.log(another_array.flat(2)); // Flattens two levels
+console.log(another_array.flat(3)); // Flattens three levels
+console.log(another_array.flat(Infinity)); // Fully flattens the array
+```
+
+## Other Array Methods
+```js
+console.log(Array.isArray("hitesh")); // false (checks if the value is an array)
+console.log(Array.from("hitesh")); // ["h", "i", "t", "e", "s", "h"]
+console.log(Array.from({ name: "hitesh" })); // [] (cannot directly convert objects to arrays)
+
+// Converting object values to array
+const obj = { name: "hitesh", age: 25 };
+console.log(Object.values(obj)); // ["hitesh", 25]
+
+let score1 = 100, score2 = 200, score3 = 300;
+console.log(Array.of(score1, score2, score3)); // [100, 200, 300]
+```
