@@ -3,10 +3,13 @@
   "version": "1.0.0",
   "description": "for practice js",
   "main": "index.js",
-  "type":"module",
+  "type": "module",
   "scripts": {
     "dev": "node ./index.js"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "big-o-calculator": "^0.0.3"
+  }
 }

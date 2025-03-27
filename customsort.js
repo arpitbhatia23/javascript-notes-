@@ -1,38 +1,80 @@
 
+import { AnalysisService } from "big-o-calculator"
 import { Queue,BTS } from "./index.js"
 
 export function testing() {
-/* The class "node" represents a node in a linked list with a value and a reference to the next node. */
 
-/* The class `treeNode` represents a node in a binary tree with a value, a left child, and a right
-child. */
+    Array.prototype.Quicksort=function (callback=function (a,b) {
+        if (typeof a ==="string" && typeof b==='string') {
+          return a.localeCompare(b)   
+        }
+        return a-b
+    }){
+        const sorthelper=(arr)=>{
+            if (arr.length<=1)return arr
 
+            let povit =arr[arr.length-1]
+            let left =[], right =[]
+            for (let i = 0; i < arr.length-1; i++) {
+                if(callback(arr[i],povit)<0){
+                    left.push(arr[i])
+                }else{
+                    right.push(arr[i])
+                }
+            }
+            return [...sorthelper(left),povit,...sorthelper(right)]
+        }
+        const sortedarray=sorthelper([...this])
+    this.splice(0,this.length,...sortedarray)
+   
+    return this
+    }
 
+    const arr=[2,3,1,3,5,6,8,7]
+    console.log(arr.Quicksort()) 
+const calculator=new AnalysisService()
+    let code = {
+        // Language of the tested code
+        language:"js",
+        // Most languages handle data types differenty (e.g. integers vs strings). 
+        // This parameter tells the calculator about type of algorithm tested.
+        expectedSpeed: "slow",
+        // Tested code with function call and argument placeholder
+        content: `
+       Array.prototype.Quicksort=function (callback=function (a,b) {
+        if (typeof a ==="string" && typeof b==='string') {
+          return a.localeCompare(b)   
+        }
+        return a-b
+    }){
+        const sorthelper=(arr)=>{
+            if (arr.length<=1)return arr
 
-const bts=new BTS()
-bts.insert(10);
-bts.insert(5);
-
-bts.insert(15);bts.insert(25);
-bts.insert(20);
-bts.insert(35);
-
-bts.insert(3);
-bts.insert(4);
-bts.insert(2);
-bts.insert(1);
-bts.insert(0);
-
-
-bts.insert(7);
-bts.insert(12);
-
-bts.printTree()
-console.time()
-console.log( bts.search(10));
-console.timeEnd()
-
-
+            let povit =arr[arr.length-1]
+            let left =[], right =[]
+            for (let i = 0; i < arr.length-1; i++) {
+                if(callback(arr[i],povit)<0){
+                    left.push(arr[i])
+                }else{
+                    right.push(arr[i])
+                }
+            }
+            return [...sorthelper(left),povit,...sorthelper(right)]
+        }
+        const sortedarray=sorthelper([...this])
+    this.splice(0,this.length,...sortedarray)
+   
+    return this
+    }
+      `,
+      testedFunctionName: "Array.prototype.Quicksort",
+      };
+      
+      // AnalysisService.analyze returns a promisified BigO value
+      calculator.analyze(code)
+        .then(analysisResult => {
+          console.log(analysisResult.bigO); // O(n)
+        });
 
 }
 

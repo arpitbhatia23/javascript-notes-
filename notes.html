@@ -3,22 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Markdown Embed</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/2.0.3/showdown.min.js"></script>
+    <title>Markdown Viewer - Dark Mode</title>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.2.0/github-markdown.min.css">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+            background-color: #0d1117;
+            color: #c9d1d9;
+        }
+        .markdown-body {
+            max-width: 800px;
+            width: 100%;
+            background: #161b22;
+            color: #c9d1d9;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(255, 255, 255, 0.1);
+        }
+        a {
+            color: #58a6ff;
+        }
+        pre {
+            background: #0d1117 !important;
+            color: #c9d1d9 !important;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+    </style>
 </head>
 <body>
-
-    <div id="markdown-content">Loading...</div>
+    <article id="content" class="markdown-body"></article>
 
     <script>
-        fetch('Jsnotes.md') // Replace with the actual file path
+        fetch("Jsnotes.md")  // Change to your Markdown file
             .then(response => response.text())
-            .then(markdown => {
-                let converter = new showdown.Converter();
-                document.getElementById('markdown-content').innerHTML = converter.makeHtml(markdown);
+            .then(text => {
+                document.getElementById("content").innerHTML = marked.parse(text);
             })
-            .catch(error => console.error('Error loading markdown:', error));
+            .catch(error => console.error("Error loading Markdown file:", error));
     </script>
-
 </body>
 </html>

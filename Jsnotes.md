@@ -199,11 +199,11 @@ console.log(typeof strNull); // Output: "string"
 ```
 
 
-# Why String Conversion is Confusing in JavaScript
+# Why String Conversion is Confusing in `JavaScript`
 
-## Operations in JavaScript
+## Operations in `JavaScript`
 
-### Operations in Numbers
+### Operations in `Numbers`
 ```js
 let value = 3;
 let negValue = -value;
@@ -219,7 +219,7 @@ console.log(2 / 2);  // Output: 1
 console.log(2 % 2);  // Output: 0
 ```
 
-### Operations in Strings
+### Operations in `Strings`
 ```js
 let str1 = "hellO";
 let str2 = "aurpit";
@@ -242,7 +242,7 @@ console.log(+false); // Output: 0
 
 ---
 
-## Prefix and Postfix Operators in `JavaScript`
+## `Prefix` and `Postfix` Operators in `JavaScript`
 ### Explanation
 - **Prefix (`++var`)**: The variable is incremented **before** its value is used.
 - **Postfix (`var++`)**: The variable is incremented **after** its value is used.
@@ -321,7 +321,7 @@ console.log("2" ===2) //false*/
 
 ## Types of Datatypes
 
-### Primitive Datatypes
+### `Primitive` Datatypes
 Primitive datatypes are stored in stack memory and hold copies of values.
 
 - **String**
@@ -346,7 +346,7 @@ const anotherId = Symbol("123"); // Symbol
 console.log(id === anotherId); // false
 ```
 
-### Non-Primitive Datatypes (Reference Types)
+### `Non-Primitive` Datatypes (Reference Types)
 Non-primitive datatypes are stored in heap memory and hold references to values.
 
 - **Array**
@@ -361,9 +361,9 @@ let obj = { name: "Aurpit", age: 12 }; // Object
 let myFunc = function() { console.log("Hello World"); }; // Function
 ```
 
-## Stack and Heap Memory
+## `Stack` and `Heap` Memory
 
-### Stack Memory
+### `Stack` Memory
 Stack memory is used for **primitive** datatypes, and it stores a copy of the value.
 
 #### Example:
@@ -379,7 +379,7 @@ console.log(myAnotherName); // Hanu
 console.log(myName); // Aurpit (unchanged)
 ```
 
-### Heap Memory
+### `Heap` Memory
 Heap memory is used for **non-primitive** datatypes, and it stores a reference of the value.
 
 #### Example:
@@ -401,9 +401,9 @@ console.log(user2.email); // 123@gmail.com
 
 In this case, `user2` references the same memory location as `user`, so changing `user2.email` also updates `user.email`.
 
-# Strings
+# `Strings`
 
-Strings in JavaScript can be defined using **single quotes ('')**, **double quotes ("")**, or the **String constructor**.
+`Strings` in JavaScript can be defined using **single quotes ('')**, **double quotes ("")**, or the **String constructor**.
 
 ## Examples:
 ```js
@@ -446,5 +446,122 @@ console.log(url.includes('hitesh')); // true
 
 // Splitting a String
 console.log(url.split("/")); // [ 'https:', '', 'hitesh.com', 'hitesh%20choudary' ]
+```
+
+# JavaScript `Numbers` and `Math`
+
+## `Numbers`
+
+### Definition
+Numbers in JavaScript can be represented as primitive values or as objects of the `Number` class. JavaScript supports integers, floating-point numbers, and special values like `Infinity` and `NaN`.
+
+```js
+const score = 100;
+console.log(score); // 100
+
+// Another way to define a number object
+const num = new Number(400);
+console.log(num); // [Number: 400] (Node.js) or "Number {400}" (Browser)
+
+console.log(num.toString()); // "400"
+console.log(num.toString().length); // 3
+
+console.log(num.toFixed(2)); // "400.00"
+
+const anotherNum = 23.891;
+console.log(anotherNum.toPrecision(3)); // "23.9"
+
+const hundred = 1000000;
+console.log(hundred.toLocaleString()); // "1,000,000"
+
+console.log(Number.MAX_VALUE); // Largest possible number in JavaScript
+```
+
+## `Math` Operations
+
+### Definition
+The `Math` object in JavaScript provides built-in mathematical functions and constants for performing complex calculations.
+
+```js
+console.log(Math); // Object [Math] {}
+
+console.log(Math.abs(-4)); // Returns the absolute value: 4
+console.log(Math.round(4.3)); // Rounds to the nearest integer: 4
+console.log(Math.ceil(4.2)); // Rounds up to the nearest integer: 5
+console.log(Math.floor(4.3)); // Rounds down to the nearest integer: 4
+console.log(Math.min(4, 3, 5, 7, 8)); // Returns the smallest value: 3
+console.log(Math.max(4, 3, 5, 7, 8)); // Returns the largest value: 8
+
+console.log(Math.random()); // Returns a random number between 0 and 1
+console.log(Math.random() * 10 + 1); // Returns a random number between 1 and 10
+
+// Generating a random number in a given range
+const min = 10;
+const max = 20;
+console.log(Math.floor(Math.random() * (max - min + 1)) + min); // Random number between 10 and 20
+```
+
+# `Dates` in JavaScript
+
+JavaScript `Date` is an object that represents a single moment in time in a platform-independent format. The `Date` object encapsulates an integral number representing milliseconds since midnight at the beginning of **January 1, 1970, UTC**.
+
+## Creating `Date` Objects
+```js
+let date = new Date();
+console.log(date); // Output: Current date and time
+console.log(date.toString()); // Output: Full string representation
+console.log(date.toDateString()); // Output: Date without time
+console.log(typeof date); // Output: "object"
+```
+
+## Creating a Specific `Date`
+```js
+let myCreatedDate = new Date(2023, 0, 23); // Year, Month (0-based), Day
+console.log(myCreatedDate.toDateString()); // Output: Mon Jan 23 2023
+```
+
+## Creating a Specific `Date` with `Time`
+```js
+let myCreatedDate1 = new Date(2023, 0, 23, 5, 55); // Year, Month, Day, Hour, Minute
+console.log(myCreatedDate1.toString()); // Output: Mon Jan 23 2023 05:55:00 GMT+0000 (Coordinated Universal Time)
+```
+
+## `Timestamps`
+```js
+let myTimeStamp = Date.now();
+console.log(myTimeStamp); // Output: Milliseconds since Jan 1, 1970
+console.log(myCreatedDate.getTime()); // Output: Get time for specific date
+console.log(Date.now() / 1000); // Output: Convert milliseconds to seconds
+console.log(Math.floor(Date.now() / 1000)); // Output: Round down to seconds
+```
+
+## Extracting Date Parts
+```js
+let newDate = new Date();
+console.log(newDate.getMonth()); // Output: Returns month (0-based)
+```
+
+## Formatting Dates
+```js
+console.log(newDate.toLocaleString('default', {
+    weekday: "long"
+})); // Output: Wednesday
+
+console.log(newDate.toLocaleString('default', {
+    year: "numeric",
+    month: "long",
+    day: "numeric"
+})); // Output: March 27, 2025
+
+console.log(newDate.toLocaleString('default', {
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+    hour12: true
+})); // Output: 12:34:56 PM
+
+console.log(newDate.toISOString()); // Output: 2025-03-27T12:34:56.000Z (ISO format)
+
+console.log(newDate.toUTCString()); // Output: Wed, 27 Mar 2025 12:34:56 GMT (UTC format)
 ```
 
