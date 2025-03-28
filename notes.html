@@ -45,6 +45,7 @@
 fetch("Jsnotes.md")
     .then(response => {
         if (!response.ok) {
+            console.log(response)
             // If local fetch fails, try fetching from GitHub
             return fetch(markdownFileUrl);
         }
