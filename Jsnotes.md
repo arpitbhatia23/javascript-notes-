@@ -656,3 +656,205 @@ console.log(Object.values(obj)); // ["hitesh", 25]
 let score1 = 100, score2 = 200, score3 = 300;
 console.log(Array.of(score1, score2, score3)); // [100, 200, 300]
 ```
+
+# JavaScript `Object`
+
+## Singleton Object vs Object Literals
+- **Singleton objects are created using the `Object` constructor.**  
+- **Object literals are created using curly brackets `{}`.**
+
+## Object Creation
+
+```js
+const mysym = Symbol("key1");
+
+const obj = {
+    [mysym]: "my key 1",
+    name: "hitesh",
+    location: "Jaipur",
+    email: "hitesh@gmail.com",
+    fullname: "Hitesh Choudary",
+    isLogin: false,
+};
+console.log(obj);
+/*
+{
+  name: 'hitesh',
+  location: 'Jaipur',
+  email: 'hitesh@gmail.com',
+  fullname: 'Hitesh Choudary',
+  isLogin: false,
+  [Symbol(key1)]: 'my key 1'
+}
+*/
+console.log(obj.email); // hitesh@gmail.com
+// Another way to access properties
+console.log(obj["email"]); // hitesh@gmail.com
+
+// Accessing symbol key
+console.log(obj[mysym]); // my key 1
+
+Object.freeze(obj); // Freezing the object to prevent modifications
+obj.email = "hitesh@yahoo.com"; // No effect due to freeze
+console.log(obj);
+```
+
+## Creating Methods in an Object
+
+```js
+const obj = {
+    [mysym]: "my key 1",
+    name: "hitesh",
+    location: "Jaipur",
+    email: "hitesh@gmail.com",
+    fullname: "Hitesh Choudary",
+    isLogin: false,
+};
+
+obj.greeting = function() {
+    console.log("Hello World");
+};
+
+console.log(obj.greeting); // [Function (anonymous)]
+console.log(obj.greeting()); // Hello World undefined
+
+// Since the function does not return anything, JavaScript implicitly returns `undefined`.
+// If we return a string, this issue won't occur.
+
+obj.greeting2 = function() {
+   return "Hello World";
+};
+console.log(obj.greeting2()); // Hello World
+```
+
+## Creating an Object with a Constructor
+
+```js
+const tinder = new Object();
+// const tinder = {}; // Both return an empty object
+console.log(tinder); // {}
+
+tinder.id = "123abc";
+tinder.name = "Sam";
+tinder.isLogin = false;
+console.log(tinder);
+/*
+{ id: '123abc', name: 'Sam', isLogin: false }
+*/
+```
+
+## Nested Objects and Optional Chaining
+
+```js
+const regularUser = {
+    email: "some@gmail.com",
+    username: {
+        fullname: {
+            firstName: "Hitesh",
+            lastName: "Choudary"
+        }
+    }
+};
+console.log(regularUser);
+/*
+{
+  email: 'some@gmail.com',
+  username: { fullname: { firstName: 'Hitesh', lastName: 'Choudary' } }
+}
+*/
+console.log(regularUser.username.fullname); // { firstName: 'Hitesh', lastName: 'Choudary' }
+console.log(regularUser?.username?.fullname?.firstName); // Hitesh
+console.log(regularUser?.username?.fullname?.middleName); // undefined
+// Optional chaining returns undefined if the key does not exist
+```
+
+## Merging Objects
+
+```js
+const obj1 = { 1: "a", 2: "b" };
+const obj2 = { 3: "a", 4: "b" };
+const obj3 = { obj1, obj2 };
+console.log(obj3);
+/*
+{ obj1: { '1': 'a', '2': 'b' }, obj2: { '3': 'a', '4': 'b' } }
+*/
+
+const obj4 = Object.assign({}, obj1, obj2);
+console.log(obj4); // { '1': 'a', '2': 'b', '3': 'a', '4': 'b' }
+console.log(obj1); // { '1': 'a', '2': 'b' }
+```
+
+## Merging Using the Spread Operator
+
+```js
+const obj1 = { 1: "a", 2: "b" };
+const obj2 = { 3: "a", 4: "b" };
+const obj3 = { ...obj1, ...obj2 };
+console.log(obj3); // { '1': 'a', '2': 'b', '3': 'a', '4': 'b' }
+```
+
+## Objects Inside an Array
+
+```js
+const objArray = [{ id: "1", email: "b@gmail.com" }, { id: "2", 4: "a@gmail.com" }];
+console.log(objArray[0].email); // b@gmail.com
+```
+
+## Other Useful Object Methods
+
+```js
+const objArray = [{ id: "1", email: "b@gmail.com" }, { id: "2", 4: "a@gmail.com" }];
+console.log(Object.keys(objArray)); // [ '0', '1' ]
+console.log(Object.values(objArray)); // [ { id: '1', email: 'b@gmail.com' }, { '4': 'a@gmail.com', id: '2' } ]
+console.log(Object.entries(objArray));
+/*
+[
+  [ '0', { id: '1', email: 'b@gmail.com' } ],
+  [ '1', { '4': 'a@gmail.com', id: '2' } ]
+]
+*/
+console.log(objArray[0].hasOwnProperty("id")); // true
+```
+
+## Object Destructuring and JSON
+
+```js
+const course = {
+    courseName: "JavaScript",
+    price: "999",
+    courseTeacher: "Hitesh"
+};
+console.log(course.courseTeacher); // Hitesh
+
+// Using destructuring
+const { courseTeacher } = course;
+console.log(courseTeacher); // Hitesh
+const { courseTeacher: teacher } = course;
+console.log(teacher); // Hitesh
+```
+
+### Destructuring in React
+
+```js
+const Navbar = ({ company }) => {
+    console.log(company);
+};
+Navbar({ company: "Chai or Code" });
+```
+
+## JSON in JavaScript
+
+```json
+{
+    "name": "Hitesh",
+    "courseName": "JavaScript",
+    "price": "Free"
+}
+```
+
+- `JSON` is similar to an object but all **keys must be in strings**.
+- `JSON` formatter tools help visualize and beautify `JSON` responses.
+- Most APIs return responses in `JSON` format because it is **universally accepted**.
+- `JSON` stands for **JavaScript Object Notation**.
+- `JSON` can be accessed similarly to objects or arrays. Sometimes `JSON` responses contain arrays.
+

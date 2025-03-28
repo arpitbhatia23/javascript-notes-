@@ -27,10 +27,20 @@ export function testing() {
         const sortedarray=sorthelper([...this])
     this.splice(0,this.length,...sortedarray)
    
-    return this
-    }
 
-  
+}
 
+
+const course={
+    coursename:"js",
+    price:"999",
+    courseteacher:"hitesh"
+}
+console.log(course.courseteacher)//hitesh
+//with destucting
+const {courseteacher}=course
+console.log(courseteacher)//hitesh
+const {courseteacher:teacher}=course
+console.log(teacher)//hitesh
 }
 
