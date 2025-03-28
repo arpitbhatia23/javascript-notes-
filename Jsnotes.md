@@ -1,22 +1,21 @@
 # Variables and Constants  
 
-## `let`, `var`, and `const`  
+**`let`,`var`,and `const`**
 
-### **`let`**  
-`let` is a keyword used to declare a variable that can be reassigned but is block-scoped. It is a **mutable** variable and has **local (block) scope**.  
+ `let` is a keyword used to declare a variable that can be reassigned but is block-scoped. It is a **mutable** variable and has **local (block) scope**.  
 
 ```js
 let score = 30;
 ```
 
-### **`const`**  
+  
 `const` is used to declare a **constant**. It is **immutable**, meaning its value **cannot be changed** after assignment.  
 
 ```js
 const score = 20;
 ```
 
-### **`var`**  
+
 `var` is a **global scope** variable. It is **not recommended** in modern JavaScript because of issues with block scope and function scope.  
 
 ```js
@@ -27,14 +26,14 @@ var score = 40;
 
 ---
 
-## **Important Question**  
+**Important Question**  
 If we declare a variable without assigning a value, JavaScript **by default assigns `undefined`** to it.  
 
 ---
 
 # **Datatypes and ECMAScript (ECMA)**  
 
-### **Strict Mode**  
+**Strict Mode**  
 ```js
 "use strict";
 /*
@@ -201,9 +200,11 @@ console.log(typeof strNull); // Output: "string"
 
 # Why String Conversion is Confusing in `JavaScript`
 
-## Operations in `JavaScript`
+**Operations in `JavaScript`**
 
-### Operations in `Numbers`
+**Operations in `Numbers`**  
+
+
 ```js
 let value = 3;
 let negValue = -value;
@@ -857,4 +858,265 @@ Navbar({ company: "Chai or Code" });
 - Most APIs return responses in `JSON` format because it is **universally accepted**.
 - `JSON` stands for **JavaScript Object Notation**.
 - `JSON` can be accessed similarly to objects or arrays. Sometimes `JSON` responses contain arrays.
+
+
+
+# Functions in JavaScript
+
+**Functions are used to make sections of code reusable.**
+
+```js
+function sayMyName() {
+    console.log("Hitesh Choudhary");
+}
+
+sayMyName(); // Hitesh Choudhary (Function execution)
+sayMyName; // Function reference
+```
+
+## Argument and Parameter
+```js
+function addTwoNumbers(num1, num2) { // Parameters
+    console.log(num1 + num2);
+}
+
+addTwoNumbers(3, 2); // Arguments 3, 2 -> Output: 5
+```
+
+## `return` in Function
+```js
+function addTwoNumbers(num1, num2) {
+    console.log(num1 + num2);
+}
+
+const res = addTwoNumbers(3, 2); // Output: 5
+console.log(res); // Undefined because we didn't return any value
+
+function add(num1, num2) {
+    let result = num1 + num2;
+    return result;
+    // or simply return num1 + num2;
+}
+
+const res1 = add(3, 5);
+console.log(res1); // Output: 8
+```
+
+## String Interpolation in Function
+```js
+function loginMessage(username) {
+    return `${username} just logged in`;
+}
+
+const res = loginMessage("Hitesh");
+console.log(res); // Output: Hitesh just logged in
+// If no argument is passed, it returns undefined
+```
+
+## Type Check in Function
+```js
+function loginUser(username) {
+    if (username === undefined) {
+        console.log("Please enter a username");
+        return;
+    }
+    return `${username} just logged in`;
+}
+
+console.log(loginUser()); // Output: Please enter a username, undefined
+console.log(loginUser("Hitesh")); // Output: Hitesh just logged in
+
+// OR
+function loginUser(username) {
+    if (!username) { // ! converts truthy values to false and vice versa
+        console.log("Please enter a username");
+        return;
+    }
+    return `${username} just logged in`;
+}
+
+console.log(loginUser()); // Output: Please enter a username, undefined
+console.log(loginUser("Hitesh")); // Output: Hitesh just logged in
+
+// OR (Using Default Parameter)
+function loginUser(username = "Sam") {
+    return `${username} just logged in`;
+}
+
+console.log(loginUser()); // Output: Sam just logged in
+```
+
+## Rest Operator in JavaScript
+```js
+function calculateCartPrice(num) {
+    return num;
+}
+
+console.log(calculateCartPrice(2)); // Output: 2
+
+// If multiple values are passed
+console.log(calculateCartPrice(2, 10, 12, 23)); // Output: 2 (returns the first value)
+
+// Using Rest Operator
+function calculateCartPrice(...num) {
+    return num;
+}
+
+console.log(calculateCartPrice(2, 12, 23, 14)); // Output: [2, 12, 23, 14]
+
+// OR
+function calculateCartPrice(num1, num2, ...num) {
+    return num;
+}
+
+console.log(calculateCartPrice(2, 12, 23, 14)); // Output: [23, 14]
+```
+
+## Object and Array as Arguments
+```js
+const user = {
+    username: "Hitesh",
+    price: 199
+};
+
+function handleObject(obj) {
+    console.log(`Username is ${obj?.username} and price is ${obj?.price}`);
+}
+
+handleObject(user); // Output: Username is Hitesh and price is 199
+
+// OR
+handleObject({
+    username: "Aurpit",
+    price: 150
+}); // Output: Username is Aurpit and price is 150
+
+// Array
+function returnSecondValue(arr) {
+    console.log(arr[1]);
+}
+
+returnSecondValue([200, 300, 400, 500]); // Output: 300
+```
+
+# `Global Scope` and `Local Scope`
+```js
+let a = 10;
+const b = 20;
+var c = 30;
+
+console.log(a); // 10
+console.log(b); // 20
+console.log(c); // 30
+
+// OR
+if (true) {
+    let a = 10;
+    const b = 20;
+    var c = 30;
+}
+
+console.log(a); // ReferenceError: a is not defined
+console.log(b); // ReferenceError: b is not defined
+console.log(c); // 30
+
+// {} (Curly Braces) define scope when used with functions and conditional statements
+
+// Example with Global and Local Scope
+var c = 300; // Global Scope
+if (true) {
+    let a = 10;
+    const b = 20;
+    var c = 30;
+    console.log(a); // 10
+    console.log(b); // 20
+    console.log(c); // 30
+    // Local Scope can access Global Scope variables, but Global Scope cannot access Local Scope variables
+}
+
+console.log(c); // Output: 30
+```
+## **Nested Scope in JavaScript**
+
+```js
+// Nested scope in function
+function one() {
+    const username = "hitesh";
+    
+    function two() {
+        const website = "youtube";
+        console.log(`username ${username} website ${website}`); // Output: username hitesh website youtube
+    }
+    
+    two();
+    
+    console.log(website); // ❌ ReferenceError: website is not defined
+    // The variable `website` is defined inside `two()` and is not accessible outside.
+}
+
+one();
+
+// Nested scope in if-else
+if (true) {
+    const username = "hitesh";
+    
+    if (username === "hitesh") {
+        const website = "youtube";
+        console.log(`username ${username} website ${website}`); // Output: username hitesh website youtube
+    }
+    
+    console.log(website); // ❌ ReferenceError: website is not defined
+    // The variable `website` is scoped inside the inner `if` block.
+}
+```
+
+---
+
+## **Hoisting (Basic) in JavaScript**
+
+```js
+// declarations function
+function addOne(num) {
+    console.log(num + 1);
+}
+
+addOne(5); // ✅ Output: 6
+
+// Function Expression
+const addTwo = function (num) {
+    console.log(num + 2);
+};
+
+addTwo(5); // ✅ Output: 7
+```
+
+### **Understanding Hoisting:**
+```js
+addOne(5); // ✅ Output: 6 - Function declarations are hoisted
+
+function addOne(num) {
+    console.log(num + 1);
+}
+
+addTwo(5); // ❌ ReferenceError: Cannot access 'addTwo' before initialization
+
+const addTwo = function (num) {
+    console.log(num + 2);
+};
+```
+
+### **Explanation:**
+1. **Function declarations** (`function addOne()`) are **hoisted** to the top, meaning they can be called before they are defined in the code.
+2. **Function expressions** (`const addTwo = function()`) are **not hoisted** the same way. Since `addTwo` is declared as a `const` variable, it does not exist before its definition, leading to a **ReferenceError** if accessed before initialization.
+
+```js
+// Behind the scenes hoisting behavior:
+// This happens internally:
+function addOne(num) {
+    console.log(num + 1);
+}
+
+// But this doesn't:
+// const addTwo; (This variable exists but is in the 'temporal dead zone' before initialization)
+```
 

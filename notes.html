@@ -3,61 +3,184 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Markdown Viewer - Dark Mode</title>
+    <title>Markdown Book Viewer</title>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.2.0/github-markdown.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism-themes/1.9.0/prism-one-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+
     <style>
         body {
             display: flex;
             justify-content: center;
+            align-items: flex-start;
             padding: 20px;
             background-color: #0d1117;
             color: #c9d1d9;
+            font-family: Arial, sans-serif;
+            height: 100vh;
+            margin: 0;
+            overflow-y: auto;
         }
-        .markdown-body {
-            max-width: 1200px;
+        .container {
+            max-width: 800px;
             width: 100%;
             background: #161b22;
             color: #c9d1d9;
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 4px 6px rgba(255, 255, 255, 0.1);
+            min-height: 300px;
         }
         a {
             color: #58a6ff;
         }
+        /* Remove background for all headings */
+        h1, h2, h3, h4, h5, h6 {
+            background: none !important;
+            color: #c9d1d9;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+        h1 { font-size: 1.5rem; }
+        h2 { font-size: 1.3rem; }
+        h3 { font-size: 1.2rem; }
+        h4, h5, h6 { font-size: 1rem; }
+
         pre {
-            background: #0d1117 !important;
-            color: #c9d1d9 !important;
-            padding: 10px;
-            border-radius: 5px;
+            background: #1e1e1e !important;
+            padding: 22px;
+            border-radius: 8px;
             overflow-x: auto;
+            position: relative;
+        }
+        code {
+            display: inline-block;
+            padding: 30px;
+            font-family: "Fira Code", monospace;
+            font-size: 14px;
+            z-index: -100;
+        }
+        .copy-btn {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: #1a1b1c;
+            color: #c9d1d9;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 3px;
+            font-size: 12px;
+            opacity: 0.7;
+        }
+        .copy-btn:hover {
+            opacity: 1;
+        }
+        button {
+            background: #21262d;
+            color: #c9d1d9;
+            border: none;
+            padding: 15px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 18px;
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        button:disabled {
+            background: #444c56;
+            cursor: not-allowed;
+        }
+        #prevPage {
+            left: 20px;
+        }
+        #nextPage {
+            right: 20px;
         }
     </style>
 </head>
 <body>
-    <article id="content" class="markdown-body"></article>
+    <button id="prevPage" onclick="changePage(-1)">⬅️ Previous</button>
+    
+    <div class="container">
+        <article id="content" class="markdown-body"></article>
+    </div>
+
+    <button id="nextPage" onclick="changePage(1)">Next ➡️</button>
 
     <script>
-       const markdownFileUrl = "https://raw.githubusercontent.com/arpitbhatia23/javascript-notes-/main/Jsnotes.md";
+        const markdownFileUrl = "https://raw.githubusercontent.com/arpitbhatia23/javascript-notes-/main/Jsnotes.md";
+        let pages = [];
+        let currentPage = 0;
 
-// Try fetching the local file first
-fetch("Jsnotes.md")
-    .then(response => {
-        if (!response.ok) {
-            console.log(response)
-            // If local fetch fails, try fetching from GitHub
-            return fetch(markdownFileUrl);
+        function loadMarkdown() {
+    fetch(markdownFileUrl)
+        .then(response => response.text())
+        .then(text => {
+            pages = text.split(/^# /m).filter(page => page.trim());
+            pages = pages.map(page => "# " + page.trim());
+
+            // Fix 'let, var, const' breaking into multiple lines
+            pages = pages.map(page => page.replace(/`(\w+)`\s*\n\s*/g, "`$1` "));
+            renderPage();
+        })
+        .catch(error => console.error("Error loading Markdown file:", error));
+}
+
+        function renderPage() {
+            if (pages.length === 0) return;
+            document.getElementById("content").innerHTML = marked.parse(pages[currentPage]);
+            highlightCode();
+            addCopyButtons();
+            updateButtons();
         }
-        return response;
-    })
-    .then(response => response.text())
-    .then(text => {
-        document.getElementById("content").innerHTML = marked.parse(text);
-    })
-    .catch(error => console.error("Error loading Markdown file:", error));
 
-            
+        function changePage(direction) {
+            const newPage = currentPage + direction;
+            if (newPage >= 0 && newPage < pages.length) {
+                currentPage = newPage;
+                renderPage();
+            }
+        }
+
+        function updateButtons() {
+            document.getElementById("prevPage").disabled = currentPage === 0;
+            document.getElementById("nextPage").disabled = currentPage === pages.length - 1;
+        }
+
+        function highlightCode() {
+            document.querySelectorAll("pre code").forEach(block => {
+                block.classList.add("language-javascript"); 
+                Prism.highlightElement(block);
+            });
+        }
+
+        function addCopyButtons() {
+            document.querySelectorAll("pre code").forEach(codeBlock => {
+                const pre = codeBlock.parentElement;
+                if (!pre.querySelector(".copy-btn")) {
+                    const button = document.createElement("button");
+                    button.innerText = "Copy";
+                    button.className = "copy-btn";
+                    button.onclick = () => copyToClipboard(codeBlock, button);
+                    pre.style.position = "relative"; 
+                    pre.appendChild(button);
+                }
+            });
+        }
+
+        function copyToClipboard(codeBlock, button) {
+            const code = codeBlock.innerText;
+            navigator.clipboard.writeText(code).then(() => {
+                button.innerText = "Copied!";
+                setTimeout(() => button.innerText = "Copy", 2000);
+            }).catch(err => console.error("Copy failed:", err));
+        }
+
+        loadMarkdown();
     </script>
 </body>
 </html>
