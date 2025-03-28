@@ -39,12 +39,24 @@
     <article id="content" class="markdown-body"></article>
 
     <script>
-        fetch("Jsnotes.md")  // Change to your Markdown file
-            .then(response => response.text())
-            .then(text => {
-                document.getElementById("content").innerHTML = marked.parse(text);
-            })
-            .catch(error => console.error("Error loading Markdown file:", error));
+       const markdownFileUrl = "https://raw.githubusercontent.com/arpitbhatia23/javascript-notes-/main/Jsnotes.md";
+
+// Try fetching the local file first
+fetch("Jsnotes.md")
+    .then(response => {
+        if (!response.ok) {
+            // If local fetch fails, try fetching from GitHub
+            return fetch(markdownFileUrl);
+        }
+        return response;
+    })
+    .then(response => response.text())
+    .then(text => {
+        document.getElementById("content").innerHTML = marked.parse(text);
+    })
+    .catch(error => console.error("Error loading Markdown file:", error));
+
+            
     </script>
 </body>
 </html>
