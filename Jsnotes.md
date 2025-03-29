@@ -1256,11 +1256,16 @@ let res2=addnum(10,2)
 
 ![global exuction context](images/gec.png)
 
-2 memory creation phase
-![menory creation phase](images/mcp.png)
-first cycle complete  
+2 memory creation phase  
 
-3 excution phase
+
+![menory creation phase](images/mcp.png)
+
+first cycle complete   
+
+3 excution phase  
+
+
 ![excution phase](images/ep.png)
 
 second cycle end
