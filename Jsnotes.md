@@ -1252,7 +1252,8 @@ function addnum (num1,num2){
 let res1=addnum(val1,val2)
 let res2=addnum(10,2)
 ```
-1 global excution
+1 global excution 
+
 ![global exuction context](images/gec.png)  
 
 2 memory creation phase  
