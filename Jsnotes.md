@@ -1293,3 +1293,7 @@ function three (){
 one()
 ```
 ![callstack](images/callstack.png)
+
+
+we can see this call stack in windows inspect under source
+go to soruce tab then click not snippet under this we can see this call stack
