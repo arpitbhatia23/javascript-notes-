@@ -1209,6 +1209,11 @@ To prevent global scope pollution, we use IIFE.
 })(); // Hello world
 
 /* Use `;` before IIFE to avoid errors if previous statements don't end with `;`. */
+
+((name)=>{
+      console.log(` db conected to ${name}`)
+  })("hitesh")// db conected to hitesh
+  
 ```
 
 ## Summary

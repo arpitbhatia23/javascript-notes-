@@ -3,19 +3,8 @@
 export function testing() {
    // regular function
 
-   (function (){
-    console.log("hello world")
-
-   })();//hello world
-
-   (function chai (){
-    console.log("hello world")
-
-   })();//hello world
-
-( ()=>{
-    console.log("hello world")
-
-   })()//hello world
+   ((name)=>{
+      console.log(` db conected to ${name}`)
+  })("hitesh")// db conected to hitesh
 }
 
