@@ -8,8 +8,5 @@
     "dev": "node ./index.js"
   },
   "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "big-o-calculator": "^0.0.3"
-  }
+  "license": "ISC"
 }

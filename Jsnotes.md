@@ -1120,3 +1120,99 @@ function addOne(num) {
 // const addTwo; (This variable exists but is in the 'temporal dead zone' before initialization)
 ```
 
+# `this` and Arrow Functions in JavaScript
+
+## `this` in Regular Functions
+
+```js
+const user = {
+    username: "hitesh",
+    price: 999,
+    welcomemsg: function () {
+        console.log(`${this.username} welcome to website`);
+        console.log(this);
+    }
+};
+
+user.welcomemsg(); // hitesh welcome to website
+user.username = "sam";
+user.welcomemsg(); // sam welcome to website
+
+console.log(this); // {} in Node.js, `window` in browsers (undefined in strict mode)
+```
+
+### `this` in Regular Function Calls
+```js
+function chai() {
+    let username = "hitesh";
+    console.log(this.username); // undefined
+    console.log(this); // `global` in Node.js, `window` in browsers (undefined in strict mode)
+}
+chai();
+```
+
+### `this` in Function Expressions
+```js
+const chai = function () {
+    let username = "hitesh";
+    console.log(this.username); // undefined
+    console.log(this); // `global` in Node.js, `window` in browsers (undefined in strict mode)
+};
+chai();
+```
+
+## `this` in Arrow Functions
+
+```js
+const chai = () => {
+    let username = "hitesh";
+    console.log(this.username); // TypeError: Cannot read properties of undefined
+    console.log(this); // `{}` in Node.js (undefined in strict mode)
+};
+chai();
+```
+
+### Arrow Functions and Implicit Returns
+```js
+const addTwo = (n1, n2) => {
+    return n1 + n2;
+};
+console.log(addTwo(2, 3)); // 5
+
+// Implicit return
+const addTwoShort = (n1, n2) => n1 + n2;
+console.log(addTwoShort(2, 3)); // 5
+
+// Parentheses for object return
+const getUser = () => ({ username: "hitesh" });
+console.log(getUser()); // { username: 'hitesh' }
+```
+
+## Immediately Invoked Function Expressions (IIFE)
+
+To prevent global scope pollution, we use IIFE.
+
+```js
+// Function Definition & Execution
+;(function () {
+    console.log("Hello world");
+})(); // Hello world
+
+// Named IIFE
+;(function chai() {
+    console.log("Hello world");
+})(); // Hello world
+
+// Arrow Function IIFE
+;(() => {
+    console.log("Hello world");
+})(); // Hello world
+
+/* Use `;` before IIFE to avoid errors if previous statements don't end with `;`. */
+```
+
+## Summary
+- `this` behaves differently in regular vs arrow functions.
+- Arrow functions do not bind `this` to an object, inheriting it from their lexical scope.
+- IIFE helps prevent global scope pollution.
+
