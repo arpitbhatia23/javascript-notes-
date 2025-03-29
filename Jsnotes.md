@@ -1221,3 +1221,55 @@ To prevent global scope pollution, we use IIFE.
 - Arrow functions do not bind `this` to an object, inheriting it from their lexical scope.
 - IIFE helps prevent global scope pollution.
 
+
+# Execution Context and Call Stack
+
+
+**JavaScript Execution Context**  
+
+### types of Execution Context:  
+- Global Execution Context  
+- Function Execution Context  
+- Eval Execution Context  
+
+![global excution function](images/globalEC.png)  
+
+**Global Execution Context is stored in this.**  
+
+![mermory creation phase or excution phase](images/memory.png)
+
+then start creation phase or excution phase
+
+**Example of exuction context**
+
+```js
+let val1=10
+let val2=5
+function addnum (num1,num2){
+    let total =num1 +num2
+    return total
+}
+let res1=addnum(val1,val2)
+let res2=addnum(10,2)
+```
+1 global excution
+
+![global exuction context](images/gec.png)
+
+2 memory creation phase
+![menory creation phase](images/mcp.png)
+first cycle complete  
+
+3 excution phase
+![excution phase](images/ep.png)
+
+second cycle end
+
+## call stack
+The Call Stack keeps track of function execution in JavaScript.Each function call is added to the stack and removed once execution is complete.
+
+When `addNum(val1, val2) `is called, it is pushed onto the call stack.
+
+When `addNum(10, 2)` is called, it is also pushed onto the stack.
+
+Once a function returns a value, it is popped from the stack.
