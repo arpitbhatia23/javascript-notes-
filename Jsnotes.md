@@ -1277,3 +1277,19 @@ When `addNum(val1, val2) `is called, it is pushed onto the call stack.
 When `addNum(10, 2)` is called, it is also pushed onto the stack.
 
 Once a function returns a value, it is popped from the stack.
+
+```js
+function one (){
+    console.log("one")
+    two()
+}
+function two (){
+    console.log("two")
+    three()
+}
+function three (){
+    console.log("three")
+}
+one()
+```
+![callstack](images/callstack.png)
