@@ -1297,3 +1297,342 @@ one()
 
 we can see this call stack in windows inspect under source
 go to soruce tab then click not snippet under this we can see this call stack
+
+
+# control flow in javascript 
+
+**if statement** : if the conditon true then code excute other wise not   
+
+```js 
+// syntex of if statement
+if (true ){
+    console.log(`code execute`)
+}
+
+if(2==2){
+    console.log(`code execute`)
+}
+
+const userLoggedIn=true
+if(userLoggedIn){
+    console.log(`code excute`)
+}
+
+```
+conditions <,>,<=,>=,==,===  
+e.g 
+```js
+2<=2  //true
+3!=2 //true
+if(3!=2) {
+    console.log(`code executed`)
+}
+if(2=="2"){
+    console.log("executed")// code ececuted
+}
+
+if(2==="2"){
+       console.log("executed")
+ 
+}
+
+```
+
+**if else statement**
+```js
+const temp=41
+   // conditional code
+   if(temp){
+      console.log("temp less than 50")//temp less than 50
+   }
+   else {
+      console.log("temp more than 50")
+   }
+
+    const score=200
+   // conditional code
+   if(score>100){
+      const power="fly"
+      console.log(`power :${power}`)//power :fly
+   }
+   console.log(`user power :${power}`)//ReferenceError: power is not defined
+
+```
+**if else if Statement**
+```js
+const balance =1000
+// explicit scope 
+   if(balance)console.log(`test`)// test // good practice ,short hand
+
+   if(balance) console.log("test"),console.log('test1') 
+//test 
+//test1 
+/*not a good practice*/
+
+const balance =1000
+ 
+   if(balance<300){
+      console.log(`balance is less then 300`)
+   }
+   else if(balance<750){
+      console.log(`balance is less then 750`)
+
+   }
+   else if (balance<900){
+      console.log(`balance is less then 900`)
+
+   }
+   else{
+      console.log(`balance is less then 1200`) //balance is less then 1200
+
+   }
+  
+```
+
+**&& or ||**
+```js
+ const userloggedIn=true 
+   const debitcard=true
+   if(userloggedIn&&debitcard){
+      console.log('allow to by course')//allow to by course
+   }
+
+    const loginfromgoogle =false
+   const loginfromemail=true 
+   if(loginfromgoogle||loginfromemail){
+      console.log('user login')//user login
+   }
+```
+
+**switch case**
+```js
+const month =3 || "mar"
+  switch (month) {
+   case 1:
+      console.log("jan")
+      break;
+
+   case 2:
+      console.log("feb")
+      break;
+  
+   case 3:
+      console.log("mar")
+      break;
+  
+   case 4:
+      console.log("april")
+      break;
+  
+   case 5:
+      console.log("may")
+      break;
+  
+   case 6:
+      console.log("june")
+      break;
+  
+   default:
+      console.log("month not match")
+      break;
+  }
+
+  //mar
+
+  switch (month) {
+   case "jan":
+      console.log("jan")
+      break;
+
+   case "feb":
+      console.log("feb")
+      break;
+  
+   case "mar":
+      console.log("mar")
+      break;
+  
+   case "april":
+      console.log("april")
+      break;
+  
+   case "may":
+      console.log("may")
+      break;
+  
+   case "june":
+      console.log("june")
+      break;
+  
+   default:
+      console.log("month not match")
+      break;
+  }
+//mar
+```
+**important for interview prosepective**
+```js
+  const useremail={}||[]||"h@Hiteshai"
+if(useremail){
+   console.log("got email")
+}
+else{
+   console.log('dont have email')
+}
+// got email
+
+if(useremail){
+   console.log("got email")
+}
+else{
+   console.log('dont have email')
+}
+
+// got email
+if(useremail){
+   console.log("got email")
+}
+else{
+   console.log('dont have email')
+}
+//got email
+
+// fasley value 
+// false,0,-0,BigInt 0n ,null ,undefiend,NaN
+//Truthy value
+//true ,"string","0","false","  ",[],{ }, function (){},"null" ,"undefined"
+
+// if useremail is array
+const emptyarr=[]
+   if(emptyarr.length===0){
+      console.log("array is empty")
+   }
+   //array is empty
+   const emptyobj={}
+   if(Object.keys(emptyobj)){
+      console.log(`object is empty`)
+   }
+   //object is empty
+
+   /*
+   false ==0 true 
+   false =="" true 
+   0 === "" true
+   */
+```
+**nullish coalescing operator (??) ; used for null & undefined 
+
+```js
+  let val1 
+val1 =5 ??10
+console.log(val1)//5
+
+val1=null ??10
+console.log(val1)//10
+
+val1=undefined??15
+console.log(val1)//15
+
+val1=null??10??15
+console.log(val1)//10
+```
+**terinary operator**
+```js
+// condition ?true :false
+   const iceteaprice=100
+iceteaprice<=80?console.log("less than 80"):console.log("more than 80")
+// more than 80
+```
+
+// for loop and break and countinue
+```js
+for (let i = 0; i < 10; i++) {
+   const element = i
+   console.log(i)
+   
+}
+/*
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+*/
+
+```
+```js
+for (let i = 0; i <3; i++) {
+   console.log(` outer loop ${i}`)
+  for (let i = 0; i < 3; i++) {
+console.log(`inner loop ${i}`)   
+   
+  }
+   
+}
+/*
+ outer loop 0
+inner loop 0
+inner loop 1
+inner loop 2
+ outer loop 1
+inner loop 0
+inner loop 1
+inner loop 2
+ outer loop 2
+inner loop 0
+inner loop 1
+inner loop 2
+*/
+```
+```js
+for (let i = 1; i <=3; i++) {
+   console.log(` table of  ${i}`)
+  for (let j= 0; j <=10; j++) {
+console.log(`${i} * ${j} = ${i*j}`)   
+   
+  }
+   
+}
+/*  table of  1
+1 * 0 = 0
+1 * 1 = 1
+1 * 2 = 2
+1 * 3 = 3
+1 * 4 = 4
+1 * 5 = 5
+1 * 6 = 6
+1 * 7 = 7
+1 * 8 = 8
+1 * 9 = 9
+1 * 10 = 10
+ table of  2
+2 * 0 = 0
+2 * 1 = 2
+2 * 2 = 4
+2 * 3 = 6
+2 * 4 = 8
+2 * 5 = 10
+2 * 6 = 12
+2 * 7 = 14
+2 * 8 = 16
+2 * 9 = 18
+2 * 10 = 20
+ table of  3
+3 * 0 = 0
+3 * 1 = 3
+3 * 2 = 6
+3 * 3 = 9
+3 * 4 = 12
+3 * 5 = 15
+3 * 6 = 18
+3 * 7 = 21
+3 * 8 = 24
+3 * 9 = 27
+3 * 10 = 30
+*/
+```
