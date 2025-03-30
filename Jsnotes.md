@@ -1544,7 +1544,7 @@ iceteaprice<=80?console.log("less than 80"):console.log("more than 80")
 // more than 80
 ```
 
-// for loop and break and countinue
+# for loop and break and countinue
 ```js
 for (let i = 0; i < 10; i++) {
    const element = i
@@ -1634,5 +1634,135 @@ console.log(`${i} * ${j} = ${i*j}`)
 3 * 8 = 24
 3 * 9 = 27
 3 * 10 = 30`
+*/
+```
+**iterate array with for loop**
+```js
+let arr= ["flash","superman","batman"]
+for (let i = 0; i < arr.length; i++) {
+  const element = arr[i];
+  console.log(element)
+  
+}
+/*
+
+flash
+superman
+batman
+*/
+```
+**break & continue in for loop**
+```js
+// break stop the iteration or loop when condition match
+for (let i = 0; i <=10; i++) {
+  
+  if(i==5){
+    console.log("detected 5")
+    break
+  }
+  console.log(i)
+}
+/*
+0
+1
+2
+3
+4
+detected 5
+*/
+
+// continue skip the iteration  when condition match
+
+for (let i = 0; i <=10; i++) {
+  
+  if(i==5){
+    console.log("detected 5")
+    continue
+  }
+  console.log(i)
+}
+
+/*0
+1
+2
+3
+4
+detected 5
+6
+7
+8
+9
+10*/
+```
+# do while loop or while loop
+```js
+// syntax
+//code write in this scope excute when condtion true
+while (condition) { 
+
+// code here
+  
+}
+
+let i=0
+while (i<=10) {
+   console.log(`value of  i is ${i}`) 
+   i+=2
+   
+}
+/*
+value of  i is 0
+value of  i is 2
+value of  i is 4
+value of  i is 6
+value of  i is 8
+value of  i is 10
+*/
+
+let arr=["flash","superman","batman"]
+let i=0
+while(i<arr.length){
+   console.log(`value of arr is ${arr[i]}`)
+   i++
+}
+/*
+value of arr is flash
+value of arr is superman
+value of arr is batman
+*/
+```
+```js
+// run at least one time and then repeadly excute  it as long as the condition is true
+do {
+   
+} while (condition);
+
+let score =1
+do {
+   
+   console.log(`score :${score}`)
+   score++
+} while (score<=10);
+/*
+score :1
+score :2
+score :3
+score :4
+score :5
+score :6
+score :7
+score :8
+score :9
+score :10
+*/
+
+let score =11
+do {
+   
+   console.log(`score :${score}`)
+   score++
+} while (score<=10);
+/*
+score :11
 */
 ```
