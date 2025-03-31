@@ -1766,3 +1766,194 @@ do {
 score :11
 */
 ```
+
+# Higher order array loop
+
+**for of loop**
+```js
+
+const arr=[1,2,3,4,5,6,7,8]
+for (const i of arr) {
+   console.log(i)
+   
+}
+/**
+1
+2
+3
+4
+5
+6
+7
+8
+  
+ */
+
+const greetings='hello world!'
+for (const greet of greetings) {
+   console.log(greet)
+}
+/*
+h
+e
+l
+l
+o
+ 
+w
+o
+r
+l
+d
+! */
+
+```
+
+**Map in javascript**
+
+```js
+// map has unique values
+ const map =new Map()
+   map.set("in",'india')
+   map.set("us",'united state ')
+   map.set("in",'india')
+console.log(map)//Map(2) { 'in' => 'india', 'us' => 'united state ' }
+
+for (const i of map) {
+   console.log(i)
+   //[ 'in', 'india' ]
+ //  [ 'us', 'united state ' ]
+   
+}
+
+for (const [key,value] of map) {
+   console.log(`${key}:${value}`)
+   //in:india
+   //us:united state
+}
+
+```
+**For in loop**
+
+```js
+// we cant iterate object with for of loop
+
+for (const key of myobject) {
+   console.log(key)//myobject is not iterable
+   
+}
+
+// we use for in loop to iterate objects
+const myobject={
+   'game1':"NFS",
+   'game2':"spiderman"
+}
+  
+for (const key in myobject) {
+
+   console.log(key)
+   // iterate key of object 
+  //game1
+ //game2
+}
+
+for (const key in myobject) {
+   
+   console.log(`${key} :${myobject[key]}`)
+   // to iterate key and values 
+   // game1 :NFS
+//   game2 :spiderman
+}
+
+// for in loop in arr
+
+const programing=["js","py","cpp","c","java","rb"]
+
+for (const key in programing) {
+   // iterate key of arr
+  console.log(`keys`,key)
+//   keys 0
+// keys 1
+// keys 2
+// keys 3
+// keys 4
+// keys 5
+}
+
+for (const key in programing) {
+   // iterate value of arr
+   console.log(programing[key])
+//    js
+// py
+// cpp
+// c
+// java
+// rb
+}
+```
+
+**forEach loop**
+```js
+const coding=["js","ruby","java","python","cpp"]
+
+coding.forEach(function(item){
+   console.log(item)
+   //    js
+// ruby
+// java
+// python
+// cpp
+})
+
+coding.forEach((item)=>{
+   console.log(item)
+//    js
+// ruby
+// java
+// python
+// cpp
+})
+function printme(item){
+   console.log(item)
+
+}
+coding.forEach(printme) 
+// js
+// ruby
+// java
+// python
+// cpp
+
+const coding=["js","ruby","java","python","cpp"]
+coding.forEach((item,index,ar)=>{
+   console.log(item,index,ar)
+   /**
+ js 0 [ 'js', 'ruby', 'java', 'python', 'cpp' ]
+ruby 1 [ 'js', 'ruby', 'java', 'python', 'cpp' ]
+java 2 [ 'js', 'ruby', 'java', 'python', 'cpp' ]
+python 3 [ 'js', 'ruby', 'java', 'python', 'cpp' ]
+cpp 4 [ 'js', 'ruby', 'java', 'python', 'cpp' ] 
+*/
+
+})
+
+
+const mycoding=[
+   {
+      langName:"js"
+   },
+   {
+      langName:"python"
+   },
+   {
+      langName:"cpp"
+   }
+]
+
+mycoding.forEach((item)=>{
+   console.log(item)
+   //{ langName: 'js' }
+// { langName: 'python' }
+// { langName: 'cpp' }
+})
+```
