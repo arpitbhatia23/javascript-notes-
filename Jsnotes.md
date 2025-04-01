@@ -1957,3 +1957,166 @@ mycoding.forEach((item)=>{
 // { langName: 'cpp' }
 })
 ```
+
+# Filter ,map ,reduce in array
+
+**Why do we need `filter`, `map`, and `reduce` if we already have forEach?**
+
+*Because `forEach` iterates over an array but does not return a value.In some cases, we need a modified array, so we use map or filter instead.*
+
+```js
+   const coding=["js","ruby","java","python","cpp"]
+const value=coding.forEach((item)=>{
+    console.log(item)
+    /**
+     * js
+    ruby
+    java
+    python
+    cpp
+     */
+    return item
+}
+)
+console.log(value)//undefined
+```
+
+**filter in array**
+
+*`filter` is used to create a new array by filtering elements from the original array 
+ based on a given condition. It does not modify the original array.*
+```js
+ const mynum=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+   const newnum = mynum.filter(num=> num > 5);
+   console.log(newnum)//[ 6, 7, 8, 9, 10 ]
+
+   
+    const newnum2 = mynum.filter((num)=> {num < 5}); 
+    // This will not work as expected because the arrow function does not return a value.
+    console.log(newnum2)
+
+ const newnum2 = mynum.filter((num)=> { return num < 5});
+    console.log(newnum2)//[ 1, 2, 3, 4 ]
+
+    // we aslo do this with forEach but with some additional step because forEach don't return any value
+
+    const mynum=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+   
+   const output=[]
+
+   mynum.forEach((num)=>{
+
+    if(num%2==0){
+
+        output.push(num)
+
+    }
+   })
+
+   
+console.log(output)//[ 2, 4, 6, 8, 10 ]
+  const books = [
+    {
+      title: "The Pragmatic Programmer",
+      author: "Andrew Hunt, David Thomas",
+      publisher: "Addison-Wesley",
+      edition: "2nd"
+    },
+    {
+      title: "Clean Code",
+      author: "Robert C. Martin",
+      publisher: "Prentice Hall",
+      edition: "1st"
+    },
+    {
+      title: "You Don't Know JS",
+      author: "Kyle Simpson",
+      publisher: "O'Reilly Media",
+      edition: "1st"
+    },
+    {
+      title: "Eloquent JavaScript",
+      author: "Marijn Haverbeke",
+      publisher: "No Starch Press",
+      edition: "3rd"
+    }
+  ];
+
+  const filterbk=books.filter(bk=>{
+    return bk.edition==="1st"
+  })
+
+  console.log(filterbk)
+  /**
+```
+
+**map in array**  
+ *`map` is used to create a new array by applying a function to each element of the original array.
+It does not modify the original array but returns a new array with transformed values*
+
+```js 
+  const mynum=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+   
+   //map with explicit return
+   const newnum= mynum.map(num=>num+10)
+   console.log(newnum)/*[
+    11, 12, 13, 14, 15,
+    16, 17, 18, 19, 20
+  ]*/
+
+
+ //map with scope without return keyword
+   const newnum= mynum.map(num=>{num+10})
+   console.log(newnum)
+   /**
+    [
+  undefined, undefined,
+  undefined, undefined,
+  undefined, undefined,
+  undefined, undefined,
+  undefined, undefined
+]
+    */
+
+    
+ //map with scope and return keyword
+   const newnum= mynum.map(num=>{return num+10})
+   console.log(newnum)
+   /**
+   [
+  11, 12, 13, 14, 15,
+  16, 17, 18, 19, 20
+]
+    */
+
+    // chaning in js 
+  const newnum=mynum.map(num=>num*10)
+        .map(num=>num+1)
+        .filter(num=>num >50)  
+     
+console.log(newnum)//[ 51, 61, 71, 81, 91, 101 ]
+
+
+```
+
+**reduce in js**  
+*`reduce` is used to iterate over an array and accumulate a single value based on a callback function.
+It takes an initial value and applies the callback function to each element, updating the accumulator.*
+
+```js
+const mynum=[1,2,3,4,5,6,7,8,9,]
+ const num=mynum.reduce((acc,curr)=> acc+curr,0)
+ console.log(num)//45
+
+   const books = [
+        { title: "Book A", price: 500 },
+        { title: "Book B", price: 300 },
+        { title: "Book C", price: 700 }
+      ];
+      
+      const totalPrice = books.reduce((acc, book) => acc + book.price, 0);
+      
+      console.log(totalPrice); // Output: 1500
+      
+```

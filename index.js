@@ -641,6 +641,25 @@ this.splice(0,this.length,...sortedarray)
 
 
 }
+
+Object.defineProperties(Array.prototype,{
+  "customSort":{enumerable:false},
+  coustomReverers:{enumerable:false},
+  greatestnumber:{enumerable:false},
+  smallestNumber:{enumerable:false},
+  removeDuplicate:{enumerable:false},
+  Secondlargest:{enumerable:false},
+  anagrams:{enumerable:false},
+  Customfilter:{enumerable:false},
+  customMap:{enumerable:false},
+  customSlice:{enumerable:false},
+  customSplice:{enumerable:false},
+  customReduce:{enumerable:false},
+  customSome:{enumerable:false},
+  customshift:{enumerable:false},
+  Quicksort:{enumerable:false}
+}
+)
 test()
 
 
