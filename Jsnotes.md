@@ -2120,3 +2120,17 @@ const mynum=[1,2,3,4,5,6,7,8,9,]
       console.log(totalPrice); // Output: 1500
       
 ```
+
+# Async code
+**javascript**
+ - synchronus
+ - single threaded  
+ 
+ by default  
+ **Excution context**
+ ![execute context async](images/asycexx.png)  
+
+ **Event Loop**  
+ ![Event loop](images/eventloop.png)
+
+
