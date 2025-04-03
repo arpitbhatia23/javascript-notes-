@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub User Card</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        body {
+            background-color: black;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: white;
+        }
+        .card {
+            background: #1a1a1a;
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(255, 255, 255, 0.2);
+            width: 300px;
+            display: none;
+        }
+        .avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px 15px;
+            font-size: 16px;
+            border: none;
+            background: cyan;
+            color: black;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #00bcd4;
+        }
+    </style>
+</head>
+<body>
+
+    <button onclick="fetchUserData()">Get GitHub User</button>
+    
+    <div id="user-card" class="card">
+        <p>Loading...</p>
+    </div>
+
+    <script>
+        function fetchUserData() {
+            const xml = new XMLHttpRequest();
+            const requestUrl = 'https://api.github.com/users/arpitbhatia23';
+            xml.open("GET", requestUrl);
+            xml.onreadystatechange = function() {
+                if (xml.readyState === 4 && xml.status === 200) {
+                    const data = JSON.parse(this.responseText);
+                    const userCard = document.getElementById("user-card");
+                    userCard.innerHTML = `
+                        <img class="avatar" src="${data.avatar_url}" alt="User Avatar">
+                        <h2>${data.name || data.login}</h2>
+                        <p>${data.bio || "No bio available"}</p>
+                        <p>Followers: ${data.followers} | Following: ${data.following}</p>
+                        <a href="${data.html_url}" target="_blank" style="color: cyan; text-decoration: none;">View Profile</a>
+                    `;
+                    userCard.style.display = "block";
+                }
+            };
+            xml.send();
+        }
+    </script>
+
+</body>
+</html>

@@ -2132,5 +2132,248 @@ const mynum=[1,2,3,4,5,6,7,8,9,]
 
  **Event Loop**  
  ![Event loop](images/eventloop.png)
+ ## **JavaScript Event Loop**
+- The **Event Loop** is a mechanism that allows JavaScript to handle asynchronous operations efficiently.
+- It continuously monitors the **Call Stack** and the **Callback Queue** to execute functions in a non-blocking way.
+- **How It Works:**
+  1. The **Call Stack** executes synchronous code.
+  2. If an asynchronous function (e.g., `setTimeout`, Promises) is encountered, it is sent to the **Web APIs**.
+  3. Once the operation is completed, the callback is pushed into the **Callback Queue (`task queue`)** or **Microtask Queue (`high priority`)**.
+  4. The Event Loop checks if the Call Stack is empty, then moves tasks from the Queue to the Stack for execution.
+
+- **Example:**
+  ```js
+  console.log("Start");
+  
+  setTimeout(() => {
+    console.log("Async Task");
+  }, 2000);
+  
+  console.log("End");
+  ```
+  **Output:**
+  ```
+  Start
+  End
+  Async Task (after 2 seconds)
+  ```
+- **Use Case:** Ensures non-blocking execution for handling multiple tasks efficiently.
 
 
+# setTimeout and setInterval
+## JavaScript Timers: `setTimeout` and `setInterval`
+
+### **1. `setTimeout`**
+- Executes a function **once** after a specified delay (in milliseconds).
+- **Syntax:**
+  ```js
+  setTimeout(function, delay, param1, param2, ...);
+  ```
+- **Example:**
+  ```js
+  setTimeout(() => {
+    console.log("Executed after 3 seconds");
+  }, 3000);
+  ```
+- **Use Case:** Delaying execution, animations, and scheduled tasks.
+
+---
+
+### **2. `setInterval`**
+- Executes a function **repeatedly** at a fixed interval (in milliseconds).
+- **Syntax:**
+  ```js
+  setInterval(function, interval, param1, param2, ...);
+  ```
+- **Example:**
+  ```js
+  setInterval(() => {
+    console.log("Executed every 2 seconds");
+  }, 2000);
+  ```
+- **Use Case:** Real-time updates, timers, and repeated tasks.
+
+---
+
+### **Clearing `setTimeout` and `setInterval`**
+- `clearTimeout(timeoutID)`: Stops a `setTimeout` before execution.
+- `clearInterval(intervalID)`: Stops a `setInterval` from running repeatedly.
+
+- **Example:**
+  ```js
+  let timeoutID = setTimeout(() => console.log("This won't execute"), 5000);
+  clearTimeout(timeoutID); // Cancels the timeout
+
+  let intervalID = setInterval(() => console.log("Repeating"), 1000);
+  clearInterval(intervalID); // Cancels the interval
+  
+  ```
+  *see project in javascript project folder for beter understanding*
+# API request with XMLHttpRequest
+### XMLHttpRequest Notes and Definition
+
+**Definition:**
+`XMLHttpRequest (XHR)` is a JavaScript API used to send and receive data from a web server asynchronously without reloading the entire webpage. It is commonly used for AJAX-based operations.
+
+**Basic Syntax:**
+```javascript
+const xhr = new XMLHttpRequest();
+xhr.open("GET", "https://api.example.com/data", true); // true for async
+xhr.onreadystatechange = function () {
+    if (xhr.readyState === 4 && xhr.status === 200) {
+        console.log(xhr.responseText); // Handle response
+    }
+};
+xhr.send();
+```
+
+**Key Features:**
+- Supports `GET`, `POST`, `PUT`, `DELETE`, etc.
+- Enables asynchronous communication between client and server.
+- Can handle different response types (JSON, XML, text, etc.).
+- Allows monitoring request status with `readyState` and `status`.
+
+**readyState Values:**
+| State | Value | Description |
+|--------|--------|----------------|
+| UNSENT | 0 | Request not initialized |
+| OPENED | 1 | Request opened |
+| HEADERS_RECEIVED | 2 | Headers received |
+| LOADING | 3 | Loading response |
+| DONE | 4 | Request finished |
+
+🚀 *For modern projects, `fetch()` or Axios is recommended instead of XHR.*
+
+*example in xmlrquest folder under javascript project folder*
+
+# Promises 
+### Promises, Async/Await, .then/.catch, and try/catch Definitions
+
+#### **1. Promise Definition**
+A `Promise` is an object that represents the eventual completion (or failure) of an asynchronous operation and its resulting value.
+
+#### **2. Async/Await Definition**
+`async` and `await` are used to handle promises in a synchronous-like manner, making asynchronous code easier to read and write.
+
+#### **3. .then() and .catch() Definition**
+`.then()` and `.catch()` are used to handle promises.
+- `.then()` executes when the promise is resolved.
+- `.catch()` executes when the promise is rejected.
+
+#### **4. try/catch Definition**
+`try/catch` is used to handle errors gracefully, especially in `async` functions.
+
+🚀 *Use async/await with try/catch for cleaner, more readable asynchronous code!*
+
+```js
+const promiesOne=new Promise(function(resolve,reject){
+    // do an async task 
+    // Db calls  cryptography network calls
+
+    setTimeout(function () {
+        console.log("async task done")
+        resolve()
+    },1000)
+})
+
+promiesOne.then((user)=>{
+    console.log("promise one is consumed")
+})
+//async task done
+//promise one is consumed
+
+//promise two
+
+new Promise(function(resolve,reject){
+    // do an async task 
+    // Db calls  cryptography network calls
+
+    setTimeout(function () {
+        console.log("async task done")
+        resolve()
+    },1000)
+}).then(()=>{
+    console.log("promise two is consumed")
+})
+//async task done
+//promise two is consumed
+
+//promise three
+const promiseThree=new Promise(function(resolve,reject){
+
+    setTimeout(function () {
+        console.log("async task done")
+        const user={username:"john"}
+        resolve(user)
+    },1000)
+})
+
+promiseThree.then((user)=>{
+    console.log(user)
+})
+//{ username: 'john' }
+
+
+//promise four
+
+const promiseFour=new Promise(function(resolve,reject){
+    setTimeout(()=>{
+        const error=false
+        if(!error){
+          const  user={username:"john",password:"1234"}
+            resolve(user)
+        }
+        else{
+            reject("Error something went wrong")
+        }
+    },1000)
+})
+promiseFour
+.then((user)=>{
+    console.log(user)
+    return user.username
+})
+.then((username)=>{
+    console.log(username)
+}).catch((error)=>{
+    console.log(error)
+})
+.finally(()=>{
+    console.log("promises is either resolve or rejected")
+})
+//Error something went wrong id error is true  or error is false { username: 'john', password: '1234' } john
+//promises is either resolve or rejected
+
+
+const promiseFive=new Promise(function(resolve,reject){
+    setTimeout(()=>{
+        const error=true
+        if(!error){
+          const  user={username:"john",password:"1234"}
+            resolve(user)
+        }
+        else{
+            reject("Error something went wrong")
+        }
+    },1000)
+
+
+})
+
+async function consumePromiseFive(){
+try {
+    const res=await promiseFive
+    console.log(res)
+    
+} catch (error) {
+    console.log(error)
+}
+   
+}
+
+//Error something went wrong
+
+consumePromiseFive()
+
+fetch("https://api.github.com/users/arpitbhatia23").then((res)=>res.json()).then(data=>console.log(data)).catch(error=>console.log(error))
+```
