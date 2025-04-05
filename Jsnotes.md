@@ -2377,3 +2377,66 @@ consumePromiseFive()
 
 fetch("https://api.github.com/users/arpitbhatia23").then((res)=>res.json()).then(data=>console.log(data)).catch(error=>console.log(error))
 ```
+# Fetch
+
+## Fetch Explained
+
+This diagram visually explains how the `fetch()` function works in JavaScript.
+
+🔍 What is `fetch()`?
+
+`fetch("url")` is a web API used to make network requests. It returns a **Promise**.
+
+---
+
+ 🧠 Global Memory
+- When `fetch("url")` is called, a reference is stored in **global memory** under the name `response`.
+
+---
+
+⚙️ Internal Working (Web APIs or Node APIs)
+1. A network request is made by the **browser** or **Node.js environment**.
+2. While the network request is pending, the `fetch()` call doesn't block the execution — it continues running other code.
+
+---
+
+## 📦 Promise Structure
+ Inside the fetch object (Promise):
+- It maintains two arrays:
+  - `onfulfilled[]` – stores the callbacks for success.
+  - `onrejection[]` – stores the callbacks for errors.
+
+---
+
+## ✅ Success Case (✔️)
+- If the network request succeeds:
+  - The function inside `onfulfilled[]` is executed.
+  - Data is passed to `.then()`.
+
+## ❌ Failure Case (❌)
+- If the network request fails:
+  - The function inside `onrejection[]` is executed.
+  - Error is passed to `.catch()`.
+
+---
+
+## 🧵 Summary
+- `fetch()` returns a Promise.
+- It doesn't immediately give you the response; instead, it puts the logic in the fulfillment or rejection queues.
+- The actual request is handled by the browser or Node.
+
+Use `.then()` and `.catch()` to handle the result after the fetch completes.
+
+```js
+fetch("https://api.example.com")
+  .then(res => res.json())
+  .then(data => console.log(data))
+  .catch(err => console.error(err));
+```
+![fetch](images/fetch.png)
+
+
+# OOP in `javascript`
+
+**Dose javascript have classes**  
+*yes `javascript` have classes this feature was introduced with `EcamScript` 2015  (`ES6`)  it is important to note that  js is primarily a `Prototype` based language and it's classes are just `syntactical sugar` over existing prototype based inheritance machinism in other words it provide more `simillare syntax` to classes for the developer come from calss base language such as c++ java python etc .but `under the hood it work differently`*
