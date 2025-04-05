@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Aadhaar Card</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center p-4">
+
+  <div class="flex flex-col items-center">
+    <button
+      id="flipBtn"
+      class="mb-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+    >
+      Flip to Back
+    </button>
+
+    <div class="w-[350px] h-[220px] bg-white shadow-lg rounded-xl p-4 border border-gray-300">
+      <!-- Front Side -->
+      <div id="front">
+        <div class="flex items-center justify-between">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/Emblem_of_India.svg/1200px-Emblem_of_India.svg.png" alt="Emblem" class="h-8" />
+          <h1 class="text-sm font-bold text-red-600">Government of India</h1>
+          <img src="https://seeklogo.com/images/U/uidai-logo-9F73C6579A-seeklogo.com.png" alt="UIDAI" class="h-8" />
+        </div>
+
+        <div class="flex mt-2">
+          <img
+            src="https://randomuser.me/api/portraits/men/75.jpg"
+            alt="User"
+            class="h-20 w-20 rounded"
+          />
+          <div class="ml-4 text-sm">
+            <p><span class="font-bold">Name:</span> Rajesh Kumar</p>
+            <p><span class="font-bold">Gender:</span> Male</p>
+            <p><span class="font-bold">DOB:</span> 12/05/1985</p>
+          </div>
+        </div>
+
+        <div class="mt-3 text-center text-lg font-bold tracking-widest">
+          1234 5678 9012
+        </div>
+
+        <div class="mt-2 flex justify-center">
+          <img
+            src="https://chart.googleapis.com/chart?chs=80x80&cht=qr&chl=123456789012"
+            alt="QR Code"
+            class="h-20 w-20"
+          />
+        </div>
+      </div>
+
+      <!-- Back Side -->
+      <div id="back" class="hidden text-sm flex flex-col justify-between h-full">
+        <div>
+          <p class="font-bold text-gray-700">Address:</p>
+          <p>Rajesh Kumar</p>
+          <p>123, Green Street, Block B</p>
+          <p>New Delhi - 110011</p>
+          <p>India</p>
+        </div>
+
+        <div class="mt-4 flex justify-center">
+          <img
+            src="https://chart.googleapis.com/chart?chs=80x80&cht=qr&chl=123456789012"
+            alt="QR Code"
+            class="h-20 w-20"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const flipBtn = document.getElementById("flipBtn");
+    const front = document.getElementById("front");
+    const back = document.getElementById("back");
+
+    let isFront = true;
+
+    flipBtn.addEventListener("click", () => {
+      isFront = !isFront;
+      front.classList.toggle("hidden", !isFront);
+      back.classList.toggle("hidden", isFront);
+      flipBtn.textContent = `Flip to ${isFront ? "Back" : "Front"}`;
+    });
+  </script>
+</body>
+</html>

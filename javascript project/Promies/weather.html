@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- <link rel="stylesheet" href="./css.css"> -->
+</head>
+<body>
+    <div class="container">
+        <h1>Weather Dashboard</h1>
+        <input type="text" id="city" placeholder="Enter city">
+        <button onclick="getWeather()">Get Weather</button>
+        <div id="weather-container">
+            <h2 id="city-name"></h2>
+            <p id="temperature"></p>
+            <p id="humidity"></p>
+            <canvas id="weatherChart"></canvas>
+        </div>
+    </div>
+
+    <script>
+        let weatherChart = null;
+
+        async function getWeather() {
+            const apiKey = 'e38b8adced5269e5111dc584c110097a';
+            const city = document.getElementById('city').value.trim();
+
+            if (!city) {
+                alert('Please enter a city name');
+                return;
+            }
+
+            try {
+                const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`;
+                const response = await fetch(url);
+                const data = await response.json();
+
+                if (data.cod !== 200) {
+                    alert('City not found. Please enter a valid city.');
+                    return;
+                }
+
+                document.getElementById('city-name').innerText = `Weather in ${data.name}`;
+                document.getElementById('temperature').innerText = `Temperature: ${data.main.temp}°C`;
+                document.getElementById('humidity').innerText = `Humidity: ${data.main.humidity}%`;
+
+                // drawChart(data.main.temp, data.main.humidity);
+            } catch (error) {
+                console.error(error);
+                alert('Error fetching weather data. Please try again.');
+            }
+        }
+
+    /*    function drawChart(temp, humidity) {
+            const ctx = document.getElementById('weatherChart').getContext('2d');
+
+            if (weatherChart) {
+                weatherChart.destroy();
+            }
+
+            weatherChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Temperature (°C)', 'Humidity (%)'],
+                    datasets: [{
+                        label: 'Weather Data',
+                        data: [temp, humidity],
+                        backgroundColor: ['red', 'blue']
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false
+                }
+            });
+        }*/
+    </script>
+</body>
+</html>

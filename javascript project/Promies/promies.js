@@ -1,3 +1,5 @@
+setTimeout(()=>{console.log("start")},1000)
+
 const promiesOne=new Promise(function(resolve,reject){
     // do an async task 
     // Db calls  cryptography network calls
@@ -8,6 +10,7 @@ const promiesOne=new Promise(function(resolve,reject){
     },1000)
 })
 
+console.log(promiesOne)
 promiesOne.then((user)=>{
     console.log("promise one is consumed")
 })
@@ -107,4 +110,7 @@ try {
 
 consumePromiseFive()
 
-fetch("https://api.github.com/users/arpitbhatia23").then((res)=>res.json()).then(data=>console.log(data)).catch(error=>console.log(error))
+
+
+
+fetch("https://api.github.com/users/arpitbhatia23").then((res)=>res.json()).then(data=>console.log(data)).catch(error=>console.log("error while fetching data",error))
